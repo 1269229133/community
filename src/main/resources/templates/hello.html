@@ -6,6 +6,29 @@
 </head>
 <body>
 <p th:text="'Hello, ' + ${name} + '!'" />
-<p>bbb</p>
+<script src="https://how2j.cn/study/vue.min.js"></script>
+
+<div id="div1">
+
+    {{gareen.name}}
+    {{gareen.hp}}
+
+</div>
+
+<script>
+
+    //准备数据
+    var gareen = {"name":"盖伦","hp":616};
+
+    //通过vue.js 把数据和对应的视图关联起来
+    new Vue({
+        el: '#div1',
+        data: {
+            message: gareen
+        }
+    })
+
+</script>
+
 </body>
 </html>
