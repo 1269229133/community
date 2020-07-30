@@ -3,6 +3,8 @@ package life.java.community.mapper;
 import life.java.community.modle.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 //插入接口
@@ -13,4 +15,7 @@ public interface UserMapper {
             "values (#{name},#{accountId},#{token},#{gmtCreate},#{gmtModified})")
     void insert(User user);
 
+    @Select("select * from user where token = #{token}")
+    //当传入注解时的参数不是类的时候需要@Param注解
+    User findByToken(@Param("token") String token);
 }

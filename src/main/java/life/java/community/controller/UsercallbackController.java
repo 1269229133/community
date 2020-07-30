@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Controller
@@ -36,7 +36,7 @@ public class UsercallbackController {
     //获得code 和 state
     public String callback(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
-                           HttpServletRequest request) {
+                           HttpServletResponse response) {
         AccesstokenDto accesstokenDto = new AccesstokenDto();//创建AccesstokenDto对象获得token信息
         accesstokenDto.setClient_id(ClientId);
         accesstokenDto.setClient_secret(ClientSecret);
@@ -44,18 +44,23 @@ public class UsercallbackController {
         accesstokenDto.setRedirect_uri(ClientUri);
         accesstokenDto.setState(state);
         String assessToken = githubProvide.getAssessToken(accesstokenDto);
-        GithubUser GirhubUser = githubProvide.getUser(assessToken);
-
-        if (GirhubUser != null) {
+        //使用github登陆
+        GithubUser GithubUser = githubProvide.getUser(assessToken);
+        //判断登陆是否成功
+        if (GithubUser != null) {
+            //获取github用户信息
             User user = new User();
-            user.setToken(UUID.randomUUID().toString());
-            user.setName(GirhubUser.getName());
-            user.setAccountId(String.valueOf(GirhubUser.getId()));
+            //生成token
+            String token = UUID.randomUUID().toString();
+            user.setToken(token);
+            user.setName(GithubUser.getName());
+            user.setAccountId(String.valueOf(GithubUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
+            //把信息存入数据库
             userMapper.insert(user);
-            //登陆成功就写入cookie和session
-            request.getSession().setAttribute("user", GirhubUser);
+            //把token放入response的cookie里
+            response.addCookie(new Cookie("token",token));
             return "redirect:/";
         } else {
             //失败返回
