@@ -21,6 +21,7 @@ public class GithubProvide {
                 .build();
         try (Response response = client.newCall(request).execute()) {
             String string=response.body().string();
+            //分割response body，只提取token
             String token = string.split("&")[0].split("=")[1];
             System.out.println("body="+string);
             System.out.println("token="+token);
