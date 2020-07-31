@@ -1,0 +1,31 @@
+body{
+    background: #fff9f2;
+}
+.myborder{
+    border:1px solid #a1a1a1;
+    border-radius:15px;
+    background: #ffffff;
+}
+.WDback{
+    padding: 25px 50px;
+}
+.btnpush{
+    float: right;
+    margin-bottom: 15px;
+}
+.mediapadinbum{
+    padding-bottom: 10px;
+}
+.media-objectsize{
+    width: 45px;
+}
+.text{
+    color: #99a2aa;
+    line-height: 26px;
+}
+.page{
+    float: right;
+}
+.ssection{
+    margin-top: 15px;
+}

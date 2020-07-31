@@ -30,21 +30,21 @@ public class UsercallbackController {
     @Value("${github.client.uri}")
     private String ClientUri;
 
-
+    //获取github信息控制层
 
     @GetMapping("callback")
     //获得code 和 state
     public String callback(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
                            HttpServletResponse response) {
-        AccesstokenDto accesstokenDto = new AccesstokenDto();//创建AccesstokenDto对象获得token信息
+        AccesstokenDto accesstokenDto = new AccesstokenDto();//创建AccesstokenDto对象写入token信息
         accesstokenDto.setClient_id(ClientId);
         accesstokenDto.setClient_secret(ClientSecret);
         accesstokenDto.setCode(code);
         accesstokenDto.setRedirect_uri(ClientUri);
         accesstokenDto.setState(state);
         String assessToken = githubProvide.getAssessToken(accesstokenDto);
-        //使用github登陆
+        //使用github登陆，然后写入信息到GithubUser
         GithubUser GithubUser = githubProvide.getUser(assessToken);
         //判断登陆是否成功
         if (GithubUser != null) {
@@ -57,6 +57,7 @@ public class UsercallbackController {
             user.setAccountId(String.valueOf(GithubUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
+            user.setAvatarUrl(GithubUser.getAvatarUrl());
             //把信息存入数据库
             userMapper.insert(user);
             //把token放入response的cookie里
