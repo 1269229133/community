@@ -1,6 +1,6 @@
 package life.java.community.dto;
 
-import life.java.community.modle.User;
+import life.java.community.model.User;
 import lombok.Data;
 
 //提问信息

@@ -1,4 +1,4 @@
-package life.java.community.modle;
+package life.java.community.model;
 
 import lombok.Data;
 

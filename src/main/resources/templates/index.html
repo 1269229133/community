@@ -17,15 +17,17 @@
             <h2><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>Java</h2>
             <hr>
             <div class="media mediapadinbum" th:each="question : ${pagination.questions}">
-                <div class="media-left media-middle">
+                <div class="media-left ">
                     <a href="#">
                         <img class="media-object media-objectsize"
                              th:src="${question.user.avatarUrl}">
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading" th:text="${question.title}"></h4>
-                    <div style="white-space: nowrap;overflow: hidden;width: 40%;text-overflow: ellipsis;" th:text="${question.description}"></div>
+                    <h4 class="media-heading" >
+                        <a th:href="@{/questioncontent/{id}(id=${question.id})}" th:text="${question.title}"></a>
+                    </h4>
+                    <div style="white-space: nowrap;overflow: hidden;width: 40%;height: 17px;text-overflow: ellipsis;" th:text="${question.description}"></div>
                     <span class="text"><span th:text="${question.commentCount}"></span>回复 | <span
                             th:text="${question.viewCount}"></span>浏览 | <span th:text="${#calendars.format(question.gmtCreate,'dd MMMM yyyy')}"></span></span>
                 </div>
