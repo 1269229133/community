@@ -27,11 +27,12 @@
                     <h4 class="media-heading" >
                         <a th:href="@{/questioncontent/{id}(id=${question.id})}" th:text="${question.title}"></a>
                     </h4>
-                    <div style="white-space: nowrap;overflow: hidden;width: 40%;height: 17px;text-overflow: ellipsis;" th:text="${question.description}"></div>
+                    <div style="white-space: nowrap;overflow: hidden;width: 40%;height: 20px;text-overflow: ellipsis;" th:text="${question.description}"></div>
                     <span class="text"><span th:text="${question.commentCount}"></span>回复 | <span
                             th:text="${question.viewCount}"></span>浏览 | <span th:text="${#calendars.format(question.gmtCreate,'dd MMMM yyyy')}"></span></span>
                 </div>
             </div>
+
             <nav aria-label="Page navigation" class="page">
                 <ul class="pagination">
                     <li th:if="${pagination.showFirstPage}">

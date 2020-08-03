@@ -29,3 +29,11 @@ body{
 .ssection{
     margin-top: 15px;
 }
+.icon{
+    margin-right: 6px;
+    font-size: 10px;
+    cursor: pointer;
+}
+.icon:hover{
+    color: #2aabd2;
+}

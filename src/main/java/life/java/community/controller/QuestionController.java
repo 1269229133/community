@@ -20,7 +20,7 @@ public class QuestionController {
     private QuestionService questionService;
     //修改发布
     @GetMapping("/question/{id}")
-    public String edit(@PathVariable(name = "id" )Integer id,
+    public String edit(@PathVariable(name = "id" )Long id,
                        Model model) {
         QuestionDTO question = questionService.getById(id);
         //返回数据到页面
@@ -44,7 +44,7 @@ public class QuestionController {
             @RequestParam("title") String title,
             @RequestParam("description") String description,
             @RequestParam("tag") String tag,
-            @RequestParam("id") Integer id,
+            @RequestParam("id") Long id,
             HttpServletRequest request, Model model) {
         //页面登陆判断移植至WebConfig，由Spring Mvc的Interceptors代替
         if(title==null||title==""){

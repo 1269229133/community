@@ -17,7 +17,7 @@
             <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>提问</h2>
             <hr>
             <form action="/question" method="post">
-                <input type="hidden" name="id" th:value="${id} " style="readonly">
+                <input type="hidden" name="id" th:value="${id} ">
                 <div class="form-group">
                     <label for="title">标题:</label>
                     <input type="text" class="form-control" th:value="${title}" id="title" name="title"

@@ -6,6 +6,7 @@
 <generatorConfiguration>
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
                         connectionURL="jdbc:mysql://localhost:3306/community?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT"
                         userId="root"
@@ -30,8 +31,8 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="life.java.community.mapper"  targetProject="src\main\java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
-        <table tableName="user" domainObjectName="User" >
-        </table>
-
+        <table tableName="user" domainObjectName="User" ></table>
+        <table tableName="question" domainObjectName="Question" ></table>
+        <table tableName="comment" domainObjectName="Comment" ></table>
     </context>
 </generatorConfiguration>
